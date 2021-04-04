@@ -1,4 +1,6 @@
 import React from "react";
+import TodoListInput from "./TodoListInput";
+import TodoListItems from "./TodoListItems";
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -40,35 +42,17 @@ class TodoList extends React.Component {
   render() {
     return (
       <div>
-        <input
-          type="text"
-          placeholder="Add todo item"
-          value={this.state.todoItem}
-          onChange={this.handleChange}
-        ></input>
-        <button onClick={this.addItem}>ADD</button>
-        <button onClick={this.resetAllItems}>RESET</button>
-        <div className="list-group">
-          {this.state.todoList.map((item, index) => {
-            return (
-              <a
-                href="#"
-                key={index}
-                className={
-                  "list-group-item list-group-item-action " +
-                  (this.state.slelectedItems.indexOf(index) >= 0
-                    ? "active"
-                    : "")
-                }
-                onClick={() => {
-                  this.selectedItemChanged(index);
-                }}
-              >
-                {item}
-              </a>
-            );
-          })}
-        </div>
+        <TodoListInput
+          todoItem={this.state.todoItem}
+          handleChange={this.handleChange}
+          addItem={this.addItem}
+          resetAllItems={this.resetAllItems}
+        />
+        <TodoListItems
+          todoList={this.state.todoList}
+          slelectedItems={this.state.slelectedItems}
+          selectedItemChanged={this.selectedItemChanged}
+        />
       </div>
     );
   }
